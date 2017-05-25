@@ -1,0 +1,42 @@
+version: '3'
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    command: npm start
+    ports:
+      - '8079:8079'
+    volumes:
+      - './citation-practice-backend/client:/app/client'
+      - './citation-practice-backend/libs:/app/client'
+
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    links:
+      - db:db
+    environment:
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=test01
+      - DB_DATABASE=mla
+      - EMAIL_USER=user
+      - EMAIL_PASSWORD=password
+    ports:
+      - '3001:3001'
+    volumes:
+      - './citation-practice-backend/src:/app/src'
+
+  db:
+    container_name: db
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=test01
+      - POSTGRES_DB=mla
