@@ -1,0 +1,11 @@
+FROM node:7.7
+
+RUN mkdir -p /app
+WORKDIR /app
+COPY ./citation-practice-webapp/package.json ./package.json
+COPY ./citation-practice-webapp/bower.json ./bower.json
+RUN npm install -g gulp bower --quiet \
+  && npm install --quiet \
+  && bower install --allow-root
+COPY ./citation-practice-webapp ./
+RUN npm start build

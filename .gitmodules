@@ -1,0 +1,6 @@
+[submodule "citation-practice-webapp"]
+	path = citation-practice-webapp
+	url = git@github.com:SamCymbaluk/citation-practice-webapp.git
+[submodule "citation-practice-backend"]
+	path = citation-practice-backend
+	url = git@github.com:SamCymbaluk/citation-practice-backend.git
